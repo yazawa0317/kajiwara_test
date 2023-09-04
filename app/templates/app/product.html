@@ -1,0 +1,33 @@
+{% extends 'app/base.html' %} {% block content %}
+<div class="my-5">
+  <div class="row product">
+    <div class="col-md-6 mb-4 text-center">
+      <img src="{{ item_data.image.url }}" alt="" class="img-fluid" />
+    </div>
+
+    <div class="col-md-6 mb-4">
+      <div class="card">
+        <div class="card-body px-2 py-1">
+          <h3>{{ item_data.title }}</h3>
+          <p class="mb-3">{{ item_data.category }}</p>
+          <hr />
+          <p>
+            価格：
+            <span class="text-danger item-price">{{ item_data.price }}円</span>
+            　　在庫数：
+            <span class="item-stock">{{ item_data.stock }}点</span>
+          </p>
+          <p class="item-detail">商品説明：</p>
+          <p>{{ item_data.description|linebreaksbr }}</p>
+          {% if item_data.stock >= 1 %}
+          <a href="{% url 'additem' item_data.slug %}" class="btn btn-primary">カートに入れる</a>
+          {% else %} 
+            <p class="text-danger">在庫切れです</p>
+          {% endif %}  
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
